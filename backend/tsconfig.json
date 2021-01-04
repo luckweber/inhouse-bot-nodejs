@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "alwaysStrict": true,
+        "resolveJsonModule": true,
+        "experimentalDecorators": true,
+        "sourceMap": true,
+        "outDir": "dist",
+        "module": "commonjs",
+        "target": "es2017",
+        "lib": ["es2017", "dom"]
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules"]
+}
