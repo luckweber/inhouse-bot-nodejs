@@ -6,7 +6,7 @@
   "scripts": {
     "watch": "tsc -p . -w",
     "dev": "nodemon  src/index.ts",
-    "migration": "node  src/inhouse_bot/database/index.ts"
+    "migration": "tsc src/inhouse_bot/models/index.ts --outDir dist/database"
   },
   "dependencies": {
     "@types/sequelize": "^4.28.9",

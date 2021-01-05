@@ -2,6 +2,7 @@
 exports.__esModule = true;
 exports.db = void 0;
 var db = function () {
-    console.log("DDD");
+    console.debug("DDD");
 };
 exports.db = db;
+exports.db();

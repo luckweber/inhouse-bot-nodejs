@@ -1,0 +1,7 @@
+"development": {
+    "username": "your username",
+    "password": "password",
+    "database": "database name",
+    "host": "localhost", // this is usually the cause
+    "dialect": "postgres"
+  }
