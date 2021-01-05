@@ -1,47 +1,48 @@
-import { Client } from 'discord.js'
-import QueueCog from './cogs/queue_cog';
+// import { Client } from 'discord.js'
+import {CommandoClient}  from 'discord.js-commando'
 
 const path = require('path'); 
 
-class InhouseBot extends Client {
+class InhouseBot extends CommandoClient{
 
-    token:string
-    client:Client = new Client()
-    cogs:any = []
+    code:string
 
     constructor(token:string) {
+
         super()
-        this.token = token  
-        
-        // Importing locally to allow InhouseBot to be imported in the cogs
-        this.add_cog(new QueueCog(this))
 
+        this.commandPrefix = "!"
+        this.code = token
 
-        // Setting up the on_message listener that will handle queue channels
-        this.add_listener(() => {console.log("kdkk")}, 'message')
-
-        this.add_listener(() => {console.log("11111")}, 'command')
-
-        // Setting up the on_ready listener that will handle queue channels
-        this.add_listener(this.on_ready, 'ready')
-
-
+        this.register()
+        this.on('ready', this.on_ready)  
+    
     }
 
-    add_listener = (callback:any, name:string) => this.on(name, callback)
+    
 
-    add_cog = (cog:any) =>  this.cogs.push(cog)
-
-    on_ready = (ctx:any) => {
-        console.log(`${this.user?.username} has connected to Discord`)
+    register = () => {
+        this.registry
+            .registerDefaultTypes()
+            .registerGroups([
+                ['players', 'Command Group to players']
+            ])
+            .registerDefaultGroups()
+            .registerDefaultCommands()
+            .registerCommandsIn(path.join(__dirname, './commands/'));
     }
+
+
+    on_ready = () => {
+        console.log(`Logged in as ${this.channels.client.user?.tag}! (${this.channels.client.user?.id})`)
+    };
 
 
     async run() {
         try {
-            await this.login(this.token)
+            await this.login(this.code)
         } catch (error) {
-            console.debug(error)
+            console.log(error);
         }
     }
 }
