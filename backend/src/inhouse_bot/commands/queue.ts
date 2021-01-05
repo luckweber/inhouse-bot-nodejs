@@ -22,7 +22,6 @@ const queue_solo = (user:any, args:any, message:any) => {
 
     
     
-    
     return message.channel.send(`You are included in the Queue`)
 } 
 
