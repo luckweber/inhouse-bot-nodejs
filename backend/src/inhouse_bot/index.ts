@@ -1,39 +1,45 @@
 import { Client } from 'discord.js'
-import { readdirSync } from 'fs'
+import QueueCog from './cogs/queue_cog';
 
 const path = require('path'); 
 
-class InhouseBot {
+class InhouseBot extends Client {
 
     token:string
     client:Client = new Client()
+    cogs:any = []
 
     constructor(token:string) {
-        this.token = token     
+        super()
+        this.token = token  
+        
+        // Importing locally to allow InhouseBot to be imported in the cogs
+        this.add_cog(new QueueCog(this))
+
+
+        // Setting up the on_message listener that will handle queue channels
+        this.add_listener(() => {console.log("kdkk")}, 'message')
+
+        this.add_listener(() => {console.log("11111")}, 'command')
+
+        // Setting up the on_ready listener that will handle queue channels
+        this.add_listener(this.on_ready, 'ready')
+
+
     }
 
-    events() {
+    add_listener = (callback:any, name:string) => this.on(name, callback)
 
-        const filesDir = path.resolve(__dirname, './events/')
-        const evtFiles = readdirSync(filesDir)
+    add_cog = (cog:any) =>  this.cogs.push(cog)
 
-        console.log('log', `Carregando o total de ${evtFiles.length} eventos`)
-
-        for (const file of evtFiles) {
-            const eventName = file.split('.')[0]
-            let event = require(`./events/${file}`)
-            event = event[`${eventName}`]
-            this.client.on(eventName, event.bind(null, this.client))
-        }
-        
-
+    on_ready = (ctx:any) => {
+        console.log(`${this.user?.username} has connected to Discord`)
     }
 
 
     async run() {
         try {
-            await this.client.login(this.token)
-            await this.events()
+            await this.login(this.token)
         } catch (error) {
             console.debug(error)
         }
