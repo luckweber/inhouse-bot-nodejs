@@ -11,28 +11,28 @@ module.exports = class QueueCommand extends Command {
 			memberName: 'queue',
             description: 'Replies with a meow, kitty cat.',
             argsType:'multiple',
-            args: [
-                {
-                    key: 'role',
-                    prompt: 'Is what your Role?',
-                    type: 'string',
-                    validate: text => ROLES.includes(text),
-                    error: 'Role invalid'
-                },
-                {
-                    key: 'nickDuo',
-                    prompt: 'Is what Nick Duo?',
-                    type: 'member',
-                    error: 'Nick Duo invalid',
-                },
-                {
-                    key: 'roleDuo',
-                    prompt: 'Is what your Role Duo?',
-                    type: 'string',
-                    validate: text => ROLES.includes(text),
-                    error: 'Role do Duo invalid',
-                 },
-            ],
+            // args: [
+            //     {
+            //         key: 'role',
+            //         prompt: 'Is what your Role?',
+            //         type: 'string',
+            //         validate: text => ROLES.includes(text),
+            //         error: 'Role invalid'
+            //     },
+            //     {
+            //         key: 'nickDuo',
+            //         prompt: 'Is what Nick Duo?',
+            //         type: 'member',
+            //         error: 'Nick Duo invalid',
+            //     },
+            //     {
+            //         key: 'roleDuo',
+            //         prompt: 'Is what your Role Duo?',
+            //         type: 'string',
+            //         validate: text => ROLES.includes(text),
+            //         error: 'Role do Duo invalid',
+            //      },
+            // ],
 		});
 	}
 

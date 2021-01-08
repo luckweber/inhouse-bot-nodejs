@@ -56,7 +56,7 @@ class InhouseBot extends CommandoClient{
     on_ready = () => {
         try {
             console.log(`Logged in as ${this.channels.client.user?.tag}! (${this.channels.client.user?.id})`)
-            Tags.sync();
+            // Tags.sync();
         } catch (error) {
          console.log(error);
             
